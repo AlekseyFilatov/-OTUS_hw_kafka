@@ -1,5 +1,6 @@
 package hw4.kafka.otus;
 
+
 import akka.actor.ActorSystem
 import akka.kafka.scaladsl.{Consumer, Producer}
 import akka.kafka.{ConsumerSettings, ProducerSettings, Subscriptions}
@@ -81,3 +82,8 @@ object AkkaKafkaApplication extends App {
   runnableGraph.run()
 
 }
+
+
+
+
+
