@@ -41,6 +41,8 @@ import org.apache.kafka.clients.admin.CreateTopicsOptions;
 import org.apache.kafka.clients.admin.TopicListing;
 import org.apache.kafka.common.errors.TopicExistsException;
 
+import static hw5.kafka.otus.objectKafka.kafkalogger;
+
 
 public class objectKafka {
 
@@ -64,7 +66,7 @@ class kafkaStreamResourceClass implements AutoCloseable {
     private KafkaProducer<String, String> producer_topics;
     public kafkaStreamResourceClass() {
         try {
-            scalacontainer.zio.postgres.objectKafka.kafkalogger.info("kafkaStreamResourceClass: Acquired");
+            kafkalogger.info("kafkaStreamResourceClass: Acquired");
 
             producerProperties = new Properties();
             producerProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -95,12 +97,12 @@ class kafkaStreamResourceClass implements AutoCloseable {
 
     public void performOperation() {
         try {
-            objectKafka.kafkalogger.info("kafkaStreamResourceClass: Performing operation");
+            kafkalogger.info("kafkaStreamResourceClass: Performing operation");
             recreateTopics(1, 1, "events");
 
             Serde<String> stringSerde = Serdes.String();
 
-            objectKafka.kafkalogger.info("kafkaStreamResourceClass: stream produce");
+            kafkalogger.info("kafkaStreamResourceClass: stream produce");
 
             List<String> keyrecord = Arrays.asList("1", "2", "3", "4", "5");
             keyrecord.forEach(rec ->
@@ -110,7 +112,7 @@ class kafkaStreamResourceClass implements AutoCloseable {
                     new ProducerRecord<>("events", String.valueOf("1"), String.valueOf("1")));
             producer_topics.flush();
 
-            objectKafka.kafkalogger.info("kafkaStreamResourceClass: stream consume");
+            kafkalogger.info("kafkaStreamResourceClass: stream consume");
 
             var builder = new StreamsBuilder();
 
@@ -124,11 +126,11 @@ class kafkaStreamResourceClass implements AutoCloseable {
                     .foreach((key, count) -> scalacontainer.zio.postgres.objectKafka.kafkalogger.info("key: " + key + " -> " + count));
 
             var kafkaStreams = new KafkaStreams(builder.build(), this.createStreamsConfig("events"));
-            objectKafka.kafkalogger.info("App Started");
+            kafkalogger.info("App Started");
             kafkaStreams.start();
             Thread.sleep(30000);
-            //kafkaStreams.close();
-            //objectKafka.kafkalogger.info("App Closed");
+            kafkaStreams.close();
+            objectKafka.kafkalogger.info("App Closed");
 
         } catch (Exception e)
         {
@@ -141,11 +143,11 @@ class kafkaStreamResourceClass implements AutoCloseable {
             client.deleteTopics(
                     Stream.of(topics)
                             .toList());
-            objectKafka.kafkalogger.info("kafkaStreamResourceClass: recreateTopics - delete topics");
+            kafkalogger.info("kafkaStreamResourceClass: recreateTopics - delete topics");
             client.createTopics(Stream.of(topics)
                     .map(it -> new NewTopic(it, numPartitions, (short) replicationFactor))
                     .toList());
-            objectKafka.kafkalogger.info("kafkaStreamResourceClass: recreateTopics - create topics");
+            kafkalogger.info("kafkaStreamResourceClass: recreateTopics - create topics");
             Thread.sleep(2000);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -155,7 +157,7 @@ class kafkaStreamResourceClass implements AutoCloseable {
     @Override
     public void close()  {
         try {
-            scalacontainer.zio.postgres.objectKafka.kafkalogger.info("kafkaStreamResourceClass: Closed");
+            objectKafka.kafkalogger.info("kafkaStreamResourceClass: Closed");
             producer_topics.close();
         }
         catch (Exception e){
