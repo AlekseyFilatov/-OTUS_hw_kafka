@@ -129,6 +129,7 @@ class kafkaStreamResourceClass implements AutoCloseable {
             kafkalogger.info("App Started");
             kafkaStreams.start();
             Thread.sleep(30000);
+/*изменение*/
             kafkaStreams.close();
             objectKafka.kafkalogger.info("App Closed");
 
@@ -157,6 +158,7 @@ class kafkaStreamResourceClass implements AutoCloseable {
     @Override
     public void close()  {
         try {
+/*изменение*/
             objectKafka.kafkalogger.info("kafkaStreamResourceClass: Closed");
             producer_topics.close();
         }
