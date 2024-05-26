@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/KafkaZIOConsumer/.idea/modules/KafkaZIOConsumer.iml" filepath="$PROJECT_DIR$/KafkaZIOConsumer/.idea/modules/KafkaZIOConsumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KafkaZIOConsumer/.idea/modules/KafkaZIOConsumer-build.iml" filepath="$PROJECT_DIR$/KafkaZIOConsumer/.idea/modules/KafkaZIOConsumer-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KafkaZIOProducer/.idea/modules/KafkaZIOProducer.iml" filepath="$PROJECT_DIR$/KafkaZIOProducer/.idea/modules/KafkaZIOProducer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KafkaZIOProducer/.idea/modules/KafkaZIOProducer-build.iml" filepath="$PROJECT_DIR$/KafkaZIOProducer/.idea/modules/KafkaZIOProducer-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KafkaZioProject.iml" filepath="$PROJECT_DIR$/.idea/modules/KafkaZioProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KafkaZioProject-build.iml" filepath="$PROJECT_DIR$/.idea/modules/KafkaZioProject-build.iml" />
+    </modules>
+  </component>
+</project>
